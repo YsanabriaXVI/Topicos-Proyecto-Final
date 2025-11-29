@@ -1,13 +1,26 @@
-import express from 'express';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import subscriptionRoutes from "./routes/subscription.routes";
+
+dotenv.config();
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-})
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: "GET,POST,PUT,DELETE",
+}));
 
-const PORT = process.env.PORT || 4000;
+app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-})
+app.get("/", (req, res) => {
+  res.send("SubTracker API running...");
+});
+
+app.use("/api/subscriptions", subscriptionRoutes);
+
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+  console.log(`https://localhost:${port}`);
+});
