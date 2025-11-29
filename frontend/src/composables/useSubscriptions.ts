@@ -1,5 +1,5 @@
 import { ref, computed, onMounted } from "vue";
-import type { Subscription } from "../types/Subscription";
+import type { Subscription } from "@/types/Subscription";
 import {
   getSubscriptions,
   createSubscription,
